@@ -139,15 +139,6 @@ public class SubsamplingLayerTest {
 
     }
 
-
-    @Test(expected = IllegalStateException.class)
-    public void testSubSampleLayerSumBackprop() throws Exception {
-        Layer layer = getSubsamplingLayer(SubsamplingLayer.PoolingType.SUM);
-        INDArray input = getData();
-        layer.setInput(input);
-        layer.backpropGradient(epsilon);
-    }
-
     //////////////////////////////////////////////////////////////////////////////////
 
     private Layer getSubsamplingLayer(SubsamplingLayer.PoolingType pooling) {

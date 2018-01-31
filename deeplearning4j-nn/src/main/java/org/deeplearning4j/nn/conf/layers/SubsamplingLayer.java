@@ -42,7 +42,9 @@ public class SubsamplingLayer extends Layer {
     protected double eps;
 
     public enum PoolingType {
-        MAX, AVG, SUM, PNORM;
+        MAX, AVG,
+        @Deprecated
+        SUM, PNORM;
 
         public org.deeplearning4j.nn.conf.layers.PoolingType toPoolingType() {
             switch (this) {

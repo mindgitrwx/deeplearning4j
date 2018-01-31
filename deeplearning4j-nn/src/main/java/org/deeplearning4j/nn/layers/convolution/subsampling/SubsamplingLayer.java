@@ -158,7 +158,9 @@ public class SubsamplingLayer extends AbstractLayer<org.deeplearning4j.nn.conf.l
                 break;
             case SUM:
             default:
-                throw new RuntimeException("Not supported: " + layerConf().getPoolingType());
+                throw new RuntimeException("Unsupported pooling mode: " + layerConf().getPoolingType()
+                        + ". Only MAX, AVG and PNORM pooling is supported in " + getClass().getSimpleName()
+                        + ". Layer: " + layerId());
         }
 
         int[] a = new int[nIArgs];
@@ -247,42 +249,28 @@ public class SubsamplingLayer extends AbstractLayer<org.deeplearning4j.nn.conf.l
 
         switch (layerConf().getPoolingType()) {
             case AVG:
-                //                reduced = col2d.mean(1);
-                //                time2 = System.nanoTime();
-
                 Convolution.pooling2D(input, kernel[0], kernel[1], strides[0], strides[1], pad[0], pad[1], dilation[0], dilation[1],
                                 convolutionMode == ConvolutionMode.Same, Pooling2D.Pooling2DType.AVG, Pooling2D.Divisor.INCLUDE_PADDING,
                                 0.0, outH, outW, output);
-
                 break;
             case MAX:
                 Convolution.pooling2D(input, kernel[0], kernel[1], strides[0], strides[1], pad[0], pad[1], dilation[0], dilation[1],
                                 convolutionMode == ConvolutionMode.Same, Pooling2D.Pooling2DType.MAX, Pooling2D.Divisor.INCLUDE_PADDING,
                                 0.0, outH, outW, output);
-
                 break;
             case PNORM:
                 // pnorm pooling is used for signal loss recovery it is mixed with avg pooling,
                 // applying the exponent to the input and recovering the signal by multiplying the kernel of
                 // the pooling layer and then applying the same inverse exponent
                 int pnorm = layerConf().getPnorm();
-                /*
-                
-                Transforms.abs(col2d, false);
-                Transforms.pow(col2d, pnorm, false);
-                reduced = col2d.sum(1);
-                Transforms.pow(reduced, (1.0 / pnorm), false);
-                time2 = System.nanoTime();
-                */
-
                 Convolution.pooling2D(input, kernel[0], kernel[1], strides[0], strides[1], pad[0], pad[1], dilation[0], dilation[1],
                                 convolutionMode == ConvolutionMode.Same, Pooling2D.Pooling2DType.PNORM, Pooling2D.Divisor.INCLUDE_PADDING,
                                 (double) pnorm, outH, outW, output);
-
                 break;
             default:
-                throw new IllegalStateException("Unknown/not supported pooling type: " + layerConf().getPoolingType()
-                                + " " + layerId());
+                throw new RuntimeException("Unsupported pooling mode: " + layerConf().getPoolingType()
+                        + ". Only MAX, AVG and PNORM pooling is supported in " + getClass().getSimpleName()
+                        + ". Layer: " + layerId());
         }
 
         return output;
