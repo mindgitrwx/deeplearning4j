@@ -3,6 +3,8 @@ package org.deeplearning4j.graph.models;
 /** Binary tree interface, used in DeepWalk */
 public interface BinaryTree {
 
+    int getMaxCodeLength();
+
     long getCode(int element);
 
     int getCodeLength(int element);

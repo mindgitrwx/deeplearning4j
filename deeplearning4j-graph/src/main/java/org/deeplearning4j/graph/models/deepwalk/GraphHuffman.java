@@ -118,6 +118,11 @@ public class GraphHuffman implements BinaryTree {
     }
 
     @Override
+    public int getMaxCodeLength() {
+        return MAX_CODE_LENGTH;
+    }
+
+    @Override
     public String getCodeString(int vertexNum) {
         long code = codes[vertexNum];
         int len = codeLength[vertexNum];
