@@ -1,0 +1,5 @@
+<root>
+    <item name='org.nd4j.linalg.indexing.conditions.Condition'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>
