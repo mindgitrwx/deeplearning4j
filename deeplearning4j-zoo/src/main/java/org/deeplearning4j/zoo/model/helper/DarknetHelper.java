@@ -39,10 +39,10 @@ public class DarknetHelper {
         if (!graphBuilder.getVertices().containsKey(input)) {
             input = "activation_" + (layerNumber - 1);
         }
-        if (!graphBuilder.getVertices().containsKey(input)) {
+        else if (!graphBuilder.getVertices().containsKey(input)) {
             input = "concatenate_" + (layerNumber - 1);
         }
-        if (!graphBuilder.getVertices().containsKey(input)) {
+        else if (!graphBuilder.getVertices().containsKey(input)) {
             input = "input";
         }
 
