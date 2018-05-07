@@ -58,9 +58,9 @@ public class PatriciaTrieFormatter<V> {
      */
     public String format(PatriciaTrie<V> trie, boolean formatBitString) {
         StringBuilder builder = new StringBuilder();
-        builder.append(formatHeader());
-        builder.append(formatNode(trie.getRoot().getLeft(), -1, trie.getKeyMapper(), formatBitString));
-        builder.append(formatTrailer());
+        builder.append(formatHeader())
+               .append(formatNode( trie.getRoot().getLeft(), -1, trie.getKeyMapper(), formatBitString))
+               .append(formatTrailer());
         return builder.toString();
     }
 
@@ -137,20 +137,20 @@ public class PatriciaTrieFormatter<V> {
             return "";
         } else {
             StringBuffer buffer = new StringBuffer();
-            buffer.append("\"");
-            buffer.append(getNodeId(node));
-            buffer.append("\"");
-            buffer.append(" [ ");
-            buffer.append("label=");
-            buffer.append(formatNodeLabel(node, keyMapper, formatBitString));
-            buffer.append(" ]");
-            buffer.append("\n");
+            buffer.append("\"")
+                  .append(getNodeId(node))
+                  .append("\"")
+                  .append(" [ ")
+                  .append("label=")
+                  .append(formatNodeLabel(node, keyMapper, formatBitString))
+                  .append(" ]")
+                  .append("\n");
 
-            buffer.append(formatPointer(node, node.getLeft(), "l", "sw"));
-            buffer.append(formatPointer(node, node.getRight(), "r", "se"));
+            buffer.append(formatPointer(node, node.getLeft(), "l", "sw"))
+                  .append(formatPointer(node, node.getRight(), "r", "se"));
 
-            buffer.append(formatNode(node.getLeft(), node.getBit(), keyMapper, formatBitString));
-            buffer.append(formatNode(node.getRight(), node.getBit(), keyMapper, formatBitString));
+            buffer.append(formatNode(node.getLeft(), node.getBit(), keyMapper, formatBitString))
+                  .append(formatNode(node.getRight(), node.getBit(), keyMapper, formatBitString));
 
             return buffer.toString();
         }
@@ -168,19 +168,15 @@ public class PatriciaTrieFormatter<V> {
     private String formatPointer(PatriciaTrie.PatriciaNode<V> from, PatriciaTrie.PatriciaNode<V> to, String label,
                     String tailport) {
         StringBuilder builder = new StringBuilder();
-        builder.append(getNodeId(from));
-        builder.append(" -> ");
-        builder.append(getNodeId(to));
-        builder.append(" [ ");
-        builder.append("label=\"");
-        builder.append(label);
-        builder.append(" \"");
-        builder.append("tailport=\"");
-        builder.append(tailport);
-        builder.append(" \"");
-        builder.append("fontcolor=\"#666666\" ");
-        builder.append(" ]");
-        builder.append("\n");
+        builder.append(getNodeId(from))
+               .append(" -> ")
+               .append(getNodeId(to))
+               .append(" [ ")
+               .append("label=\"").append(label) .append(" \"")
+               .append("tailport=\"") .append(tailport) .append(" \"")
+               .append("fontcolor=\"#666666\" ")
+               .append(" ]")
+               .append("\n");
         return builder.toString();
     }
 
@@ -196,39 +192,39 @@ public class PatriciaTrieFormatter<V> {
                     boolean formatBitString) {
         StringBuilder builder = new StringBuilder();
         builder.append("<<table border=\"0\" cellborder=\"0\">");
+
         // Key
-        builder.append("<tr><td>");
-        builder.append("key: <font color=\"#00a000\">");
-        builder.append(getNodeLabel(node));
-        builder.append("</font> </td></tr>");
+        builder.append("<tr><td>")
+               .append("key: <font color=\"#00a000\">")
+               .append(getNodeLabel(node))
+               .append("</font> </td></tr>");
 
         // Critical bit
-        builder.append("<tr><td>");
-        builder.append("bit: <font color=\"blue\">");
-        builder.append(node.getBit());
-        builder.append("</font> </td></tr>");
+        builder.append("<tr><td>")
+               .append("bit: <font color=\"blue\">")
+               .append(node.getBit())
+               .append("</font> </td></tr>");
 
         // Bit string
         if (formatBitString) {
-            builder.append("<tr><td>");
-            builder.append("bitString: <font color=\"blue\">");
+            builder.append("<tr><td>")
+                   .append("bitString: <font color=\"blue\">");
             String bitString = keyMapper.toBitString(node.getKey());
             int c = node.getBit() + node.getBit() / 4;
-            builder.append(bitString.substring(0, c));
-            builder.append("<font color=\"red\">");
-            builder.append(bitString.charAt(c));
-            builder.append("</font>");
-            builder.append(bitString.substring(c + 1));
-            builder.append("</font> </td></tr>");
+            builder.append(bitString.substring(0, c))
+                    .append("<font color=\"red\">")
+                    .append(bitString.charAt(c))
+                    .append("</font>")
+                    .append(bitString.substring(c + 1))
+                    .append("</font> </td></tr>");
         }
 
         // Value
-        builder.append("<tr><td>");
-        builder.append("value: <font color=\"#00a0a0\">");
-        builder.append(node.getValue());
-        builder.append("</font> </td></tr>");
-
-        builder.append("</table>>");
+        builder.append("<tr><td>")
+               .append("value: <font color=\"#00a0a0\">")
+               .append(node.getValue())
+               .append("</font> </td></tr>")
+               .append("</table>>");
         return builder.toString();
     }
 

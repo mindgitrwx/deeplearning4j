@@ -1,6 +1,9 @@
 package org.deeplearning4j.graph.api;
 
 import lombok.AllArgsConstructor;
+import Vertex_toString.java;
+import Vertex_equals.java;
+import Vertex_hashCode.java;
 
 /** Vertex in a graph
  *
@@ -22,26 +25,19 @@ public class Vertex<T> {
 
     @Override
     public String toString() {
-        return "vertex(" + idx + "," + (value != null ? value : "") + ")";
+        Vertex_toString String_changer = new Vertex_toString(this);
+        return String_changer.return_string();
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Vertex))
-            return false;
-        Vertex<?> v = (Vertex<?>) o;
-        if (idx != v.idx)
-            return false;
-        if ((value == null && v.value != null) || (value != null && v.value == null))
-            return false;
-        return value == null || value.equals(v.value);
+        Vertex_equals Compare = new Vertex_equals(this, o);
+        return Compare.compare();
     }
 
     @Override
     public int hashCode() {
-        int result = 17;
-        result = 31 * result + idx;
-        result = 31 * result + (value == null ? 0 : value.hashCode());
-        return result;
+        Vertex_hashCode result = new Vertex_hashCode(this);
+        return result.return_hashcode();
     }
 }
