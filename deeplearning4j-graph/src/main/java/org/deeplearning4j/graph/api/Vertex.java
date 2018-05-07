@@ -22,7 +22,7 @@ public class Vertex<T> {
 
     @Override
     public String toString() {
-        return "vertex(" + idx + "," + (value != null ? value : "") + ")";
+        return "vertex(" + vertexID() + "," + (getValue() != null ? getValue() : "") + ")";
     }
 
     @Override
@@ -30,18 +30,18 @@ public class Vertex<T> {
         if (!(o instanceof Vertex))
             return false;
         Vertex<?> v = (Vertex<?>) o;
-        if (idx != v.idx)
+        if (vertexID() != v.vertexID())
             return false;
-        if ((value == null && v.value != null) || (value != null && v.value == null))
+        if ((getValue() == null && v.getValue() != null) || (getValue() != null && v.getValue() == null))
             return false;
-        return value == null || value.equals(v.value);
+        return value == null || getValue().equals(v.getValue());
     }
 
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + idx;
-        result = 31 * result + (value == null ? 0 : value.hashCode());
+        result = 31 * result + vertexID();
+        result = 31 * result + (getValue() == null ? 0 : getValue().hashCode());
         return result;
     }
 }
