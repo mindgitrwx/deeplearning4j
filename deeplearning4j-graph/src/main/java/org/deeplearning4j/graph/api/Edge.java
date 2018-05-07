@@ -37,8 +37,14 @@ public class Edge<T> {
 
     @Override
     public String toString() {
-        return "edge(" + (directed ? "directed" : "undirected") + "," + from + (directed ? "->" : "--") + to + ","
-                + (value != null ? value : "") + ")";
+        String direction = "directed";
+        String connection_type = "-->";
+
+        if(getDirected() == false){
+            direction = "undirected";
+            connection_type = "--";
+        }
+        return "edge(" + direction + "," + getFrom() + connection_type + getTo() + "," + (getValue() != null ? getValue() : "") + ")";
     }
 
     @Override
