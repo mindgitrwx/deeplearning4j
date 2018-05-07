@@ -123,7 +123,7 @@ public class ConvolutionalIterationListener implements IterationListener {
 
                             try {
                                 sourceImage = restoreRGBImage(
-                                                inputs.tensorAlongDimension(sampleDim, new int[] {3, 2, 1}));
+                                                inputs.tensorAlongDimension(sampleDim, 3, 2, 1));
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
@@ -148,7 +148,7 @@ public class ConvolutionalIterationListener implements IterationListener {
 
                             try {
                                 sourceImage = restoreRGBImage(
-                                                inputs.tensorAlongDimension(sampleDim, new int[] {3, 2, 1}));
+                                                inputs.tensorAlongDimension(sampleDim, 3, 2, 1));
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }

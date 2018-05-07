@@ -101,7 +101,7 @@ public class FaceNetNN4Small2 extends ZooModel {
 
                         // Inception 2
                         .addLayer("inception-2-cnn1",
-                                        new ConvolutionLayer.Builder(new int[] {1, 1}).nIn(64).nOut(64)
+                                        new ConvolutionLayer.Builder(1, 1).nIn(64).nOut(64)
                                                         .cudnnAlgoMode(ConvolutionLayer.AlgoMode.NO_WORKSPACE).build(),
                                         "stem-lrn1")
                         .addLayer("inception-2-batch1", new BatchNormalization.Builder(false).nIn(64).nOut(64).build(),

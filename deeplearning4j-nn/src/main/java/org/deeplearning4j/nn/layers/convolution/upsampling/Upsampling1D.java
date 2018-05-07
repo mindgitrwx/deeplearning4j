@@ -58,7 +58,7 @@ public class Upsampling1D extends Upsampling2D {
     @Override
     public Pair<Gradient, INDArray> backpropGradient(INDArray epsilon) {
 
-        int size = ((BaseUpsamplingLayer) layerConf()).getSize();
+        int size = layerConf().getSize();
         epsilon = epsilon.reshape(epsilon.size(0), epsilon.size(1), epsilon.size(2), 1);
         // we replicate the error term times "size" so that backprop works properly on it
         epsilon = epsilon.repeat(3, size);

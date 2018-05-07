@@ -120,7 +120,7 @@ public class InceptionResNetV1 extends ZooModel {
                                                         .build(),
                                         "stem-cnn1")
                         .addLayer("stem-cnn2",
-                                        new ConvolutionLayer.Builder(new int[] {3, 3}).nIn(32).nOut(32)
+                                        new ConvolutionLayer.Builder(3, 3).nIn(32).nOut(32)
                                                         .cudnnAlgoMode(ConvolutionLayer.AlgoMode.NO_WORKSPACE).build(),
                                         "stem-batch1")
                         .addLayer("stem-batch2",
@@ -139,7 +139,7 @@ public class InceptionResNetV1 extends ZooModel {
                                         new int[] {3, 3}, new int[] {2, 2}).build(), "stem-batch3")
 
                         .addLayer("stem-cnn5",
-                                        new ConvolutionLayer.Builder(new int[] {1, 1}).nIn(64).nOut(80)
+                                        new ConvolutionLayer.Builder(1, 1).nIn(64).nOut(80)
                                                         .cudnnAlgoMode(ConvolutionLayer.AlgoMode.NO_WORKSPACE).build(),
                                         "stem-pool4")
                         .addLayer("stem-batch5",
@@ -147,7 +147,7 @@ public class InceptionResNetV1 extends ZooModel {
                                                         .build(),
                                         "stem-cnn5")
                         .addLayer("stem-cnn6",
-                                        new ConvolutionLayer.Builder(new int[] {3, 3}).nIn(80).nOut(128)
+                                        new ConvolutionLayer.Builder(3, 3).nIn(80).nOut(128)
                                                         .cudnnAlgoMode(ConvolutionLayer.AlgoMode.NO_WORKSPACE).build(),
                                         "stem-batch5")
                         .addLayer("stem-batch6",

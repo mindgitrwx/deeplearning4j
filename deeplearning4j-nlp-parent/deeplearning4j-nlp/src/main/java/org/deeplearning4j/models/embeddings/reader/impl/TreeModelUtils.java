@@ -53,8 +53,7 @@ public class TreeModelUtils<T extends SequenceElement> extends BasicModelUtils<T
             return new ArrayList<>();
 
         Collection<String> collection = wordsNearest(Arrays.asList(label), new ArrayList<String>(), n + 1);
-        if (collection.contains(label))
-            collection.remove(label);
+        collection.remove(label);
 
         return collection;
     }

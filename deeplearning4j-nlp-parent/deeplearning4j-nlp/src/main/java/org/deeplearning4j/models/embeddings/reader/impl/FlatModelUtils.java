@@ -32,8 +32,7 @@ public class FlatModelUtils<T extends SequenceElement> extends BasicModelUtils<T
     @Override
     public Collection<String> wordsNearest(String label, int n) {
         Collection<String> collection = wordsNearest(lookupTable.vector(label), n);
-        if (collection.contains(label))
-            collection.remove(label);
+        collection.remove(label);
         return collection;
     }
 

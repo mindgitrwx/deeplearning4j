@@ -92,7 +92,7 @@ public abstract class AbstractLSTM extends BaseRecurrentLayer {
          * @param gateActivationFn Activation function for the LSTM gates
          */
         public T gateActivationFunction(String gateActivationFn) {
-            return (T) gateActivationFunction(Activation.fromString(gateActivationFn));
+            return gateActivationFunction(Activation.fromString(gateActivationFn));
         }
 
         /**
@@ -102,7 +102,7 @@ public abstract class AbstractLSTM extends BaseRecurrentLayer {
          * @param gateActivationFn Activation function for the LSTM gates
          */
         public T gateActivationFunction(Activation gateActivationFn) {
-            return (T) gateActivationFunction(gateActivationFn.getActivationFunction());
+            return gateActivationFunction(gateActivationFn.getActivationFunction());
         }
 
         /**

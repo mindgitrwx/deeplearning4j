@@ -908,14 +908,14 @@ public class ParagraphVectors extends Word2Vec {
 
                 if (docIter instanceof LabelAwareDocumentIterator)
                     this.labelAwareIterator =
-                                    new DocumentIteratorConverter((LabelAwareDocumentIterator) docIter, labelsSource);
+                                    new DocumentIteratorConverter(docIter, labelsSource);
                 else
                     this.labelAwareIterator = new DocumentIteratorConverter(docIter, labelsSource);
             } else if (sentenceIterator != null) {
                 // we have SentenceIterator. Mechanics will be the same, as above
                 if (sentenceIterator instanceof LabelAwareSentenceIterator)
                     this.labelAwareIterator = new SentenceIteratorConverter(
-                                    (LabelAwareSentenceIterator) sentenceIterator, labelsSource);
+                            sentenceIterator, labelsSource);
                 else
                     this.labelAwareIterator = new SentenceIteratorConverter(sentenceIterator, labelsSource);
             } else if (labelAwareIterator != null) {

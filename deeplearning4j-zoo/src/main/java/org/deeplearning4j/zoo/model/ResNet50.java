@@ -94,7 +94,7 @@ public class ResNet50 extends ZooModel {
         String shortcutName = "short" + stage + block + "_branch";
 
         graph.addLayer(convName + "2a",
-                        new ConvolutionLayer.Builder(new int[] {1, 1}).nOut(filters[0]).cudnnAlgoMode(cudnnAlgoMode)
+                        new ConvolutionLayer.Builder(1, 1).nOut(filters[0]).cudnnAlgoMode(cudnnAlgoMode)
                                         .build(),
                         input)
                         .addLayer(batchName + "2a", new BatchNormalization(), convName + "2a")
@@ -111,7 +111,7 @@ public class ResNet50 extends ZooModel {
                                         batchName + "2b")
 
                         .addLayer(convName + "2c",
-                                        new ConvolutionLayer.Builder(new int[] {1, 1}).nOut(filters[2])
+                                        new ConvolutionLayer.Builder(1, 1).nOut(filters[2])
                                                         .cudnnAlgoMode(cudnnAlgoMode).build(),
                                         activationName + "2b")
                         .addLayer(batchName + "2c", new BatchNormalization(), convName + "2c")
@@ -151,7 +151,7 @@ public class ResNet50 extends ZooModel {
                                         batchName + "2b")
 
                         .addLayer(convName + "2c",
-                                        new ConvolutionLayer.Builder(new int[] {1, 1}).nOut(filters[2]).build(),
+                                        new ConvolutionLayer.Builder(1, 1).nOut(filters[2]).build(),
                                         activationName + "2b")
                         .addLayer(batchName + "2c", new BatchNormalization(), convName + "2c")
 

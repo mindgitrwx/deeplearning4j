@@ -302,7 +302,7 @@ public class KerasLayerUtils {
                     "Field " + conf.getLAYER_FIELD_CLASS_NAME() + " missing from layer config");
         if (!layerConfig.get(conf.getLAYER_FIELD_CLASS_NAME()).equals(conf.getLAYER_CLASS_NAME_TIME_DISTRIBUTED()))
             throw new InvalidKerasConfigurationException("Expected " + conf.getLAYER_CLASS_NAME_TIME_DISTRIBUTED()
-                    + " layer, found " + (String) layerConfig.get(conf.getLAYER_FIELD_CLASS_NAME()));
+                    + " layer, found " + layerConfig.get(conf.getLAYER_FIELD_CLASS_NAME()));
         if (!layerConfig.containsKey(conf.getLAYER_FIELD_CONFIG()))
             throw new InvalidKerasConfigurationException("Field "
                     + conf.getLAYER_FIELD_CONFIG() + " missing from layer config");

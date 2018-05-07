@@ -262,7 +262,6 @@ public class TreeParser {
             } catch (Exception e) {
                 log.warn("Unable to parse " + sentence.getCoveredText());
                 c2.reset();
-                continue;
             }
 
 

@@ -3580,7 +3580,7 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
                 connections = configuration.getVertexInputs().get(currentVertexName).toString();
                 List<InputType> inputTypeList = new ArrayList<>();
                 if (currentVertex.hasLayer()) {
-                    Layer currentLayer = ((LayerVertex) currentVertex).getLayer();
+                    Layer currentLayer = currentVertex.getLayer();
                     classNameArr = currentLayer.getClass().getName().split("\\.");
                     className = classNameArr[classNameArr.length - 1];
                     paramCount = String.valueOf(currentLayer.numParams());
