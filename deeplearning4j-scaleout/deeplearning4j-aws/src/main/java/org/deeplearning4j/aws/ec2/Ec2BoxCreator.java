@@ -82,7 +82,7 @@ public class Ec2BoxCreator extends BaseS3 {
 
         // Request 1 x t1.micro instance with a bid price of $0.03.
         requestRequest.setSpotPrice("0.03");
-        requestRequest.setInstanceCount(Integer.valueOf(1));
+        requestRequest.setInstanceCount(1);
 
         // Setup the specifications of the launch. This includes the
         // instance type (e.g. t1.micro) and the latest Amazon Linux

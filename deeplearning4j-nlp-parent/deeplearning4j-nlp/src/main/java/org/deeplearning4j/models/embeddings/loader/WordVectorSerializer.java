@@ -1923,7 +1923,7 @@ public class WordVectorSerializer {
     private static byte[] listToArray(List<Byte> code) {
         byte[] array = new byte[40];
         for (int x = 0; x < code.size(); x++) {
-            array[x] = code.get(x).byteValue();
+            array[x] = code.get(x);
         }
         return array;
     }
@@ -1931,7 +1931,7 @@ public class WordVectorSerializer {
     private static int[] listToArray(List<Integer> points, int codeLen) {
         int[] array = new int[points.size()];
         for (int x = 0; x < points.size(); x++) {
-            array[x] = points.get(x).intValue();
+            array[x] = points.get(x);
         }
         return array;
     }
