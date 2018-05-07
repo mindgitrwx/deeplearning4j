@@ -3,7 +3,7 @@ package org.deeplearning4j.graph.api;
 import lombok.Data;
 import Edge.java;
 
-public class Edge_toString(Edge<T> data){
+public class Edge_toString(Edge<?> data){
     String getString(){
         String direction = "directed";
         String connection_type = "-->";

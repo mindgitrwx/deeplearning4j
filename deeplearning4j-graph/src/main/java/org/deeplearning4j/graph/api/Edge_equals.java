@@ -3,7 +3,7 @@ package org.deeplearning4j.graph.api;
 import lombok.Data;
 import Edge.java;
 
-public class Edge_equals(Edge<T> data, Object o){
+public class Edge_equals(Edge<?> data, Object o){
 
     boolean compare(){
         if (!(o instanceof Edge))
