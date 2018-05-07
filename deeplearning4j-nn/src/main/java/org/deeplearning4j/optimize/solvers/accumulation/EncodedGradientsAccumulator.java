@@ -151,7 +151,7 @@ public class EncodedGradientsAccumulator implements GradientsAccumulator, Regist
 
     @Override
     public void fallbackToSingleConsumerMode(boolean reallyFallback) {
-        if (externalSource != null && externalSource instanceof Registerable)
+        if (externalSource instanceof Registerable)
             ((Registerable) externalSource).fallbackToSingleConsumerMode(reallyFallback);
 
         bypassMode.set(reallyFallback);
@@ -175,7 +175,7 @@ public class EncodedGradientsAccumulator implements GradientsAccumulator, Regist
         }
 
         // we're passing number of consumers for current session to externalSource, if applicable
-        if (externalSource != null && externalSource instanceof Registerable)
+        if (externalSource instanceof Registerable)
             ((Registerable) externalSource).registerConsumers(numConsumers);
 
         currentConsumers.set(numConsumers);

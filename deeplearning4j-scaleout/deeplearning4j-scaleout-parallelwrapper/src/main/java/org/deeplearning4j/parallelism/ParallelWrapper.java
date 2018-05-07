@@ -229,7 +229,7 @@ public class ParallelWrapper implements AutoCloseable {
                     if we're using registerable accumulator (i.e. we're on spark or cuda with gradients sharing),
                     update it & notify about number of threads in this training round then
                   */
-                if (gradientsAccumulator != null && gradientsAccumulator instanceof Registerable) {
+                if (gradientsAccumulator instanceof Registerable) {
                     ((Registerable) gradientsAccumulator).registerConsumers(workers);
                 }
 
@@ -264,7 +264,7 @@ public class ParallelWrapper implements AutoCloseable {
         }
 
         // launch last update
-        if (locker.get() != 0 && gradientsAccumulator != null && gradientsAccumulator instanceof Registerable) {
+        if (locker.get() != 0 &&  gradientsAccumulator instanceof Registerable) {
             ((Registerable) gradientsAccumulator).registerConsumers(locker.get());
         }
 
@@ -532,7 +532,7 @@ public class ParallelWrapper implements AutoCloseable {
                     if we're using registerable accumulator (i.e. we're on spark or cuda with gradients sharing),
                     update it & notify about number of threads in this training round then
                   */
-                if (gradientsAccumulator != null && gradientsAccumulator instanceof Registerable) {
+                if (gradientsAccumulator instanceof Registerable) {
                     ((Registerable) gradientsAccumulator).registerConsumers(workers);
                 }
 
@@ -573,7 +573,7 @@ public class ParallelWrapper implements AutoCloseable {
         }
 
         // launch last update
-        if (locker.get() != 0 && gradientsAccumulator != null && gradientsAccumulator instanceof Registerable) {
+        if (locker.get() != 0 &&  gradientsAccumulator instanceof Registerable) {
             //log.info("Finalizing process: {}", locker.get());
             ((Registerable) gradientsAccumulator).registerConsumers(locker.get());
         }

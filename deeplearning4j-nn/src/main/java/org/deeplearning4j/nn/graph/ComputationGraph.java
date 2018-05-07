@@ -2348,7 +2348,7 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
             for (String s : configuration.getNetworkOutputs()) {
                 GraphVertex gv = verticesMap.get(s);
                 Layer outLayer = gv.getLayer();
-                if (outLayer == null || !(outLayer instanceof IOutputLayer)) {
+                if (!(outLayer instanceof IOutputLayer)) {
                     log.warn("Cannot calculate score: vertex \"" + s + "\" is not an output layer");
                     return 0.0;
                 }
@@ -2411,7 +2411,7 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
         for (String s : configuration.getNetworkOutputs()) {
             GraphVertex gv = verticesMap.get(s);
             Layer outLayer = gv.getLayer();
-            if (outLayer == null || !(outLayer instanceof IOutputLayer)) {
+            if (!(outLayer instanceof IOutputLayer)) {
                 throw new UnsupportedOperationException(
                         "Cannot calculate score: vertex \"" + s + "\" is not an output layer");
             }
@@ -2809,7 +2809,7 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
      */
     public Map<String, INDArray> rnnGetPreviousState(String layerName) {
         Layer l = verticesMap.get(layerName).getLayer();
-        if (l == null || !(l instanceof RecurrentLayer))
+        if (!(l instanceof RecurrentLayer))
             return null;
         return ((RecurrentLayer) l).rnnGetPreviousState();
     }
@@ -2849,7 +2849,7 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
      */
     public void rnnSetPreviousState(String layerName, Map<String, INDArray> state) {
         Layer l = verticesMap.get(layerName).getLayer();
-        if (l == null || !(l instanceof RecurrentLayer)) {
+        if (!(l instanceof RecurrentLayer)) {
             throw new UnsupportedOperationException(
                     "Layer \"" + layerName + "\" is not a recurrent layer. Cannot set state");
         }
@@ -3830,7 +3830,7 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
             throw new IllegalArgumentException("No layer with name \"" + layerName + "\" exists");
         }
         org.deeplearning4j.nn.conf.layers.Layer conf = l.conf().getLayer();
-        if (conf == null || !(conf instanceof FeedForwardLayer)) {
+        if (!(conf instanceof FeedForwardLayer)) {
             return 0;
         }
         FeedForwardLayer ffl = (FeedForwardLayer) conf;

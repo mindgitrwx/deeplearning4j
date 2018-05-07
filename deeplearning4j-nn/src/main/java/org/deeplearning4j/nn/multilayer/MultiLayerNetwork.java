@@ -3470,7 +3470,7 @@ public class MultiLayerNetwork implements Serializable, Classifier, Layer, Neura
                     + (layers.length - 1) + " inclusive");
         }
         org.deeplearning4j.nn.conf.layers.Layer conf = layers[layer].conf().getLayer();
-        if (conf == null || !(conf instanceof FeedForwardLayer)) {
+        if (!(conf instanceof FeedForwardLayer)) {
             return 0;
         }
         FeedForwardLayer ffl = (FeedForwardLayer) conf;
