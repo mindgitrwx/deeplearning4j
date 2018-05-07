@@ -165,7 +165,7 @@ public class CRFppTxtModel extends Model {
     private void loadFeatureWeight(BufferedReader br, int[] statusCoven,
                     TreeMap<Integer, Pair<String, String>> featureNames) throws Exception {
 
-        featureTree = new SmartForest<float[]>();
+        featureTree = new SmartForest<>();
 
         int tag = 0; // 赏析按标签为用来转换
 

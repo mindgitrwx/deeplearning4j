@@ -228,7 +228,7 @@ public class ClusterSet implements Serializable {
         List<Cluster> mostPopulated = new ArrayList<>(clusters);
         Collections.sort(mostPopulated, new Comparator<Cluster>() {
             public int compare(Cluster o1, Cluster o2) {
-                return new Integer(o1.getPoints().size()).compareTo(o2.getPoints().size());
+                return Integer.compare(o1.getPoints().size(), o2.getPoints().size());
             }
         });
         return mostPopulated.subList(0, count);
