@@ -1,6 +1,9 @@
 package org.deeplearning4j.graph.api;
 
 import lombok.Data;
+import Edge_equals.java;
+import Edge_hashCode.java;
+import Edge_toString.java;
 /** Edge in a graph. May be a directed or undirected edge.<br>
  * Parameterized, and may store a value/object associated with the edge
  */
@@ -37,51 +40,20 @@ public class Edge<T> {
 
     @Override
     public String toString() {
-        String direction = "directed";
-        String connection_type = "-->";
-
-        if(getDirected() == false){
-            direction = "undirected";
-            connection_type = "--";
-        }
-        return "edge(" + direction + "," + getFrom() + connection_type + getTo() + "," + (getValue() != null ? getValue() : "") + ")";
+        Edge_toString String_changer = new Edge_toString(this);
+        return String_changer.getString();
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Edge))
-            return false;
-        Edge<?> e = (Edge<?>) o;
-        if (getDirected() != e.getDirected())
-            return false;
-        if (getDirected()) {
-            if (getFrom() != e.getFrom())
-                return false;
-            if (getTo() != e.getTo())
-                return false;
-        } else {
-            if (getFrom() == e.getFrom()) {
-                if (getTo() != e.getTo())
-                    return false;
-            } else {
-                if (getFrom() != e.getTo())
-                    return false;
-                if (getTo() != e.getFrom())
-                    return false;
-            }
-        }
-        if ((getValue() != null && e.getValue() == null) || (getValue() == null && e.getValue() != null))
-            return false;
-        return getValue() == null || getValue().equals(e.getValue());
+        Edge_equals Compare = new Edge_equals(this, o);
+        return Compare.compare();
     }
 
     @Override
     public int hashCode() {
-        int result = 17;
-        result = 31 * result + (getDirected() ? 1 : 0);
-        result = 31 * result + getFrom();
-        result = 31 * result + getTo();
-        result = 31 * result + (getValue() == null ? 0 : getValue().hashCode());
-        return result;
+        Edge_hashCode result = new Edge_hashCode(this);
+        return result.return_hashCode();
     }
 }
+
