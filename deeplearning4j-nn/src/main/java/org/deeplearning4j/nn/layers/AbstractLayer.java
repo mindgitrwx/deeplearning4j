@@ -151,8 +151,7 @@ public abstract class AbstractLayer<LayerConfT extends org.deeplearning4j.nn.con
             return;
         }
 
-        for (IterationListener listener : listeners)
-            iterationListeners.add(listener);
+        Collections.addAll(iterationListeners, listeners);
     }
 
     @Override

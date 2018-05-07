@@ -532,8 +532,7 @@ public class StringGrid extends ArrayList<List<String>> {
             //add right next to where column was split
             for (int j = 0; j < list.size(); j++) {
                 if (j == column)
-                    for (String s : split2)
-                        newList.add(s);
+                    Collections.addAll(newList, split2);
 
                 else
                     newList.add(list.get(j));
