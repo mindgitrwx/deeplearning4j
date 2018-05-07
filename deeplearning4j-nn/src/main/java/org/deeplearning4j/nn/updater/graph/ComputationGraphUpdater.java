@@ -45,8 +45,8 @@ public class ComputationGraphUpdater extends BaseMultiLayerUpdater<ComputationGr
         Layer[] out = new Layer[network.getNumLayers()];
 
         int j = 0;
-        for (int i = 0; i < topologicalOrdering.length; i++) {
-            GraphVertex currentVertex = vertices[topologicalOrdering[i]];
+        for (int i : topologicalOrdering) {
+            GraphVertex currentVertex = vertices[i];
             if (!currentVertex.hasLayer()) {
                 continue;
             }

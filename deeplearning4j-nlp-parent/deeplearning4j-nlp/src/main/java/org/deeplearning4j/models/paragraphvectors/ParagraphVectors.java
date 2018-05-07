@@ -357,9 +357,9 @@ public class ParagraphVectors extends Word2Vec {
 
         final AtomicLong flag = new AtomicLong(0);
 
-        for (int i = 0; i < documents.size(); i++) {
+        for (String document : documents) {
             BlindInferenceCallable callable =
-                            new BlindInferenceCallable(vocab, tokenizerFactory, documents.get(i), flag);
+                    new BlindInferenceCallable(vocab, tokenizerFactory, document, flag);
 
             futuresList.add(inferenceExecutor.submit(callable));
         }

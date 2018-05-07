@@ -144,9 +144,9 @@ public class ParallelWrapper implements AutoCloseable {
     @Override
     public void close() throws Exception {
         if (zoo != null) {
-            for (int i = 0; i < zoo.length; i++) {
-                if (zoo[i] != null)
-                    zoo[i].shutdown();
+            for (Trainer aZoo : zoo) {
+                if (aZoo != null)
+                    aZoo.shutdown();
             }
             zoo = null;
         }

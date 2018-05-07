@@ -102,8 +102,8 @@ public class SynonymsLibrary {
                     continue;
                 }
 
-                for (int i = 0; i < split.length; i++) {
-                    forest.add(split[i], list);
+                for (String aSplit : split) {
+                    forest.add(aSplit, list);
                 }
             }
             kv.setV(forest);

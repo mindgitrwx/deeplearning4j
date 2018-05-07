@@ -47,15 +47,15 @@ public class MovingWindowDataSetFetcher extends BaseDataFetcher {
         this.windowColumns = windowColumns;
         List<DataSet> list = data.asList();
         List<DataSet> flipped = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            INDArray label = list.get(i).getLabels();
+        for (DataSet aList : list) {
+            INDArray label = aList.getLabels();
             List<INDArray> windows =
-                            new MovingWindowMatrix(list.get(i).getFeatureMatrix(), windowRows, windowColumns, true)
-                                            .windows(true);
+                    new MovingWindowMatrix(aList.getFeatureMatrix(), windowRows, windowColumns, true)
+                            .windows(true);
             for (int j = 0; j < windows.size(); j++) {
                 flipped.add(new DataSet(windows.get(j), label));
             }
-            flipped.add(list.get(i));
+            flipped.add(aList);
         }
 
         this.data = DataSet.merge(flipped);

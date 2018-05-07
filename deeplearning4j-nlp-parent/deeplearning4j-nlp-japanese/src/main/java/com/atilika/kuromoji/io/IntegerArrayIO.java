@@ -79,8 +79,8 @@ public class IntegerArrayIO {
 
         dataOutput.writeInt(length);
 
-        for (int i = 0; i < length; i++) {
-            writeArray(dataOutput, array[i]);
+        for (int[] anArray : array) {
+            writeArray(dataOutput, anArray);
         }
     }
 

@@ -175,8 +175,8 @@ public class MathUtils {
     public static double ssReg(double[] residuals, double[] targetAttribute) {
         double mean = sum(targetAttribute) / targetAttribute.length;
         double ret = 0;
-        for (int i = 0; i < residuals.length; i++) {
-            ret += Math.pow(residuals[i] - mean, 2);
+        for (double residual : residuals) {
+            ret += Math.pow(residual - mean, 2);
         }
         return ret;
     }
@@ -240,8 +240,8 @@ public class MathUtils {
         if (vector == null)
             return ret;
         else {
-            for (int i = 0; i < vector.length; i++) {
-                ret += Math.pow(vector[i], 2);
+            for (double aVector : vector) {
+                ret += Math.pow(aVector, 2);
             }
 
         }
@@ -494,8 +494,8 @@ public class MathUtils {
     public static double sumOfMeanDifferencesOnePoint(double[] vector) {
         double mean = sum(vector) / vector.length;
         double ret = 0;
-        for (int i = 0; i < vector.length; i++) {
-            double vec1Diff = Math.pow(vector[i] - mean, 2);
+        for (double aVector : vector) {
+            double vec1Diff = Math.pow(aVector - mean, 2);
             ret += vec1Diff;
         }
         return ret;
@@ -515,8 +515,7 @@ public class MathUtils {
         if (nums == null || nums.length == 0)
             return 0;
         double ret = 1;
-        for (int i = 0; i < nums.length; i++)
-            ret *= nums[i];
+        for (double num : nums) ret *= num;
         return ret;
     }//end times
 
@@ -1131,8 +1130,8 @@ public class MathUtils {
         if (vector.length == 0) {
             return 0;
         }
-        for (int i = 0; i < vector.length; i++) {
-            sum += vector[i];
+        for (double aVector : vector) {
+            sum += aVector;
         }
         return sum / (double) vector.length;
     }//end mean
@@ -1185,8 +1184,7 @@ public class MathUtils {
     public static int distanceFinderZValue(double[] vector) {
         StringBuilder binaryBuffer = new StringBuilder();
         List<String> binaryReps = new ArrayList<>(vector.length);
-        for (int i = 0; i < vector.length; i++) {
-            double d = vector[i];
+        for (double d : vector) {
             int j = (int) d;
             String binary = Integer.toBinaryString(j);
             binaryReps.add(binary);

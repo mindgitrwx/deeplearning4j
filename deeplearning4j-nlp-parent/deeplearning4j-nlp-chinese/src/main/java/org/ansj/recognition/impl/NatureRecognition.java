@@ -222,8 +222,8 @@ public class NatureRecognition implements Recognition {
 
     private void setScore(NatureTerm natureTerm, NatureTerm[] natureTerms) {
 
-        for (int i = 0; i < natureTerms.length; i++) {
-            natureTerms[i].setScore(natureTerm);
+        for (NatureTerm natureTerm1 : natureTerms) {
+            natureTerm1.setScore(natureTerm);
         }
     }
 

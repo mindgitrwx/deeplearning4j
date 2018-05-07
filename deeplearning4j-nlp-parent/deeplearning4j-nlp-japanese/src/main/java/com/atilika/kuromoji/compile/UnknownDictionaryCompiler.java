@@ -99,8 +99,8 @@ public class UnknownDictionaryCompiler implements Compiler {
 
             String[] array = features[i];
 
-            for (int j = 0; j < array.length; j++) {
-                System.out.println("\t" + array[j]);
+            for (String anArray : array) {
+                System.out.println("\t" + anArray);
             }
 
         }

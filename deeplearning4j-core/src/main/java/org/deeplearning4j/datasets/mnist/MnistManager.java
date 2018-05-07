@@ -65,10 +65,10 @@ public class MnistManager {
             int cols = image[0].length;
             ppmOut.write("P3\n");
             ppmOut.write("" + rows + " " + cols + " 255\n");
-            for (int i = 0; i < rows; i++) {
+            for (int[] anImage : image) {
                 StringBuilder s = new StringBuilder();
                 for (int j = 0; j < cols; j++) {
-                    s.append(image[i][j] + " " + image[i][j] + " " + image[i][j] + "  ");
+                    s.append(anImage[j] + " " + anImage[j] + " " + anImage[j] + "  ");
                 }
                 ppmOut.write(s.toString());
             }

@@ -72,16 +72,16 @@ public class TermNatures implements Serializable {
         this.termNatures = termNatures;
         // find maxNature
         int maxFreq = -1;
-        TermNature termNature = null;
-        for (int i = 0; i < termNatures.length; i++) {
-            if (maxFreq < termNatures[i].frequency) {
-                maxFreq = termNatures[i].frequency;
-                termNature = termNatures[i];
+        TermNature maxTermNature = null;
+        for (TermNature t: termNatures) {
+            if (maxFreq < t.frequency) {
+                maxFreq = t.frequency;
+                maxTermNature = t;
             }
         }
 
-        if (termNature != null) {
-            this.nature = termNature.nature;
+        if (maxTermNature != null) {
+            this.nature = maxTermNature.nature;
         }
 
         serAttribute();

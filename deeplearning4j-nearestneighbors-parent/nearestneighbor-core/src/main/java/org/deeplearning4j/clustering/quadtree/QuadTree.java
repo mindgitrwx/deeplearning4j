@@ -132,7 +132,7 @@ public class QuadTree implements Serializable {
     public boolean insert(int newIndex) {
         // Ignore objects which do not belong in this quad tree
         INDArray point = data.slice(newIndex);
-        if (!boundary.containsPoint(point))
+        if (boundary.isContainsPoint(point))
             return false;
 
         cumSize++;
@@ -199,7 +199,7 @@ public class QuadTree implements Serializable {
 
         for (int n = 0; n < size; n++) {
             INDArray point = data.slice(index[n]);
-            if (!boundary.containsPoint(point))
+            if (boundary.isContainsPoint(point))
                 return false;
         }
 

@@ -197,9 +197,9 @@ public class ClusterSet implements Serializable {
      * @return
      */
     public Cluster getCluster(String id) {
-        for (int i = 0, j = clusters.size(); i < j; i++)
-            if (id.equals(clusters.get(i).getId()))
-                return clusters.get(i);
+        for (Cluster cluster : clusters)
+            if (id.equals(cluster.getId()))
+                return cluster;
         return null;
     }
 

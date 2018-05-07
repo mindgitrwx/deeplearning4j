@@ -207,9 +207,7 @@ public class ConvolutionalIterationListener implements IterationListener {
 
 
         List<BufferedImage> images = new ArrayList<>();
-        for (int layer = 0; layer < tensors3D.size(); layer++) {
-            INDArray tad = tensors3D.get(layer);
-            int zoomed = 0;
+        for (INDArray tad : tensors3D) {
 
             BufferedImage image = null;
             if (orientation == Orientation.LANDSCAPE) {
