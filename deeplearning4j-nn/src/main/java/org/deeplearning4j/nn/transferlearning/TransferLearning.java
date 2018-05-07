@@ -343,9 +343,7 @@ public class TransferLearning {
             int i = 0;
             while (i < popN) {
                 Integer layerNum = origModel.getnLayers() - i;
-                if (inputPreProcessors.containsKey(layerNum)) {
-                    inputPreProcessors.remove(layerNum);
-                }
+                inputPreProcessors.remove(layerNum);
                 editedConfs.remove(editedConfs.size() - 1);
                 editedParams.remove(editedParams.size() - 1);
                 i++;

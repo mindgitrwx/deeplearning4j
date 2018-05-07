@@ -130,9 +130,7 @@ public class MapDBStatsStorage extends BaseCollectionStatsStorage {
     @Override
     public void putStaticInfo(Persistable staticInfo) {
         List<StatsStorageEvent> sses = checkStorageEvents(staticInfo);
-        if (!sessionIDs.contains(staticInfo.getSessionID())) {
-            sessionIDs.add(staticInfo.getSessionID());
-        }
+        sessionIDs.add(staticInfo.getSessionID());
         SessionTypeWorkerId id = new SessionTypeWorkerId(staticInfo.getSessionID(), staticInfo.getTypeID(),
                         staticInfo.getWorkerID());
 

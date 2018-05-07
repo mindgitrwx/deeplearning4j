@@ -377,13 +377,9 @@ public class InMemoryLookupCache implements VocabCache<VocabWord>, Serializable 
 
     @Override
     public void removeElement(String label) {
-        if (vocabs.containsKey(label)) {
-            vocabs.remove(label);
-        }
+        vocabs.remove(label);
 
-        if (tokens.containsKey(label)) {
-            tokens.remove(label);
-        }
+        tokens.remove(label);
     }
 
     @Override
