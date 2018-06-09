@@ -2,6 +2,7 @@ package org.deeplearning4j.graph.models;
 
 /** Binary tree interface, used in DeepWalk */
 public interface BinaryTree {
+    void buildTree(int[] vertexDegree);
 
     int getMaxCodeLength();
 
