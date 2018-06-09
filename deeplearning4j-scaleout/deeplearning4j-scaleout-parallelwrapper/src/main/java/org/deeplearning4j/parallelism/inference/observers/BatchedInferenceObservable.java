@@ -55,8 +55,8 @@ public class BatchedInferenceObservable extends BasicInferenceObservable impleme
             INDArray[] result = new INDArray[inputs.get(0).length];
             for (int i = 0; i < result.length; i++) {
                 List<INDArray> examples = new ArrayList<>();
-                for (int e = 0; e < inputs.size(); e++) {
-                    examples.add(inputs.get(e)[i]);
+                for (INDArray[] input : inputs) {
+                    examples.add(input[i]);
                 }
                 result[i] = Nd4j.pile(examples);
             }

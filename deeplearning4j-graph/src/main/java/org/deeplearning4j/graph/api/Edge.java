@@ -1,7 +1,9 @@
 package org.deeplearning4j.graph.api;
 
 import lombok.Data;
-
+import Edge_equals.java;
+import Edge_hashCode.java;
+import Edge_toString.java;
 /** Edge in a graph. May be a directed or undirected edge.<br>
  * Parameterized, and may store a value/object associated with the edge
  */
@@ -20,47 +22,38 @@ public class Edge<T> {
         this.directed = directed;
     }
 
+    public int getFrom(){
+        return from;
+    }
+
+    public int getTo(){
+        return to;
+    }
+
+    public T getValue(){
+        return value;
+    }
+
+    public boolean getDirected(){
+        return directed;
+    }
+
     @Override
     public String toString() {
-        return "edge(" + (directed ? "directed" : "undirected") + "," + from + (directed ? "->" : "--") + to + ","
-                        + (value != null ? value : "") + ")";
+        Edge_toString String_changer = new Edge_toString(this);
+        return String_changer.getString();
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Edge))
-            return false;
-        Edge<?> e = (Edge<?>) o;
-        if (directed != e.directed)
-            return false;
-        if (directed) {
-            if (from != e.from)
-                return false;
-            if (to != e.to)
-                return false;
-        } else {
-            if (from == e.from) {
-                if (to != e.to)
-                    return false;
-            } else {
-                if (from != e.to)
-                    return false;
-                if (to != e.from)
-                    return false;
-            }
-        }
-        if ((value != null && e.value == null) || (value == null && e.value != null))
-            return false;
-        return value == null || value.equals(e.value);
+        Edge_equals Compare = new Edge_equals(this, o);
+        return Compare.compare();
     }
 
     @Override
     public int hashCode() {
-        int result = 17;
-        result = 31 * result + (directed ? 1 : 0);
-        result = 31 * result + from;
-        result = 31 * result + to;
-        result = 31 * result + (value == null ? 0 : value.hashCode());
-        return result;
+        Edge_hashCode result = new Edge_hashCode(this);
+        return result.return_hashCode();
     }
 }
+

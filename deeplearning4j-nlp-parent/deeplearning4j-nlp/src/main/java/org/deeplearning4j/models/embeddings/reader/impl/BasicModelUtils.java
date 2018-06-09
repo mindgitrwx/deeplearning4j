@@ -98,8 +98,7 @@ public class BasicModelUtils<T extends SequenceElement> implements ModelUtils<T>
     @Override
     public Collection<String> wordsNearest(String label, int n) {
         List<String> collection = new ArrayList<>(wordsNearest(Arrays.asList(label), new ArrayList<String>(), n + 1));
-        if (collection.contains(label))
-            collection.remove(label);
+        collection.remove(label);
 
         while (collection.size() > n)
             collection.remove(collection.size() - 1);
@@ -244,8 +243,8 @@ public class BasicModelUtils<T extends SequenceElement> implements ModelUtils<T>
 
             List<WordSimilarity> result = new ArrayList<>();
 
-            for (int i = 0; i < highToLowSimList.size(); i++) {
-                String word = vocabCache.wordAtIndex(highToLowSimList.get(i).intValue());
+            for (Double aHighToLowSimList : highToLowSimList) {
+                String word = vocabCache.wordAtIndex(aHighToLowSimList.intValue());
                 if (word != null && !word.equals("UNK") && !word.equals("STOP")) {
                     INDArray otherVec = lookupTable.vector(word);
                     double sim = Transforms.cosineSim(words, otherVec);
@@ -411,8 +410,8 @@ public class BasicModelUtils<T extends SequenceElement> implements ModelUtils<T>
 
     public static List<String> getLabels(List<WordSimilarity> results, int limit) {
         List<String> result = new ArrayList<>();
-        for (int x = 0; x < results.size(); x++) {
-            result.add(results.get(x).getWord());
+        for (WordSimilarity x : results) {
+            result.add(x.getWord());
             if (result.size() >= limit)
                 break;
         }

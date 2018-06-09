@@ -266,12 +266,8 @@ public class GloVe<T extends SequenceElement> implements ElementsLearningAlgorit
                 if (shuffle)
                     Collections.shuffle(pairs);
 
-                Iterator<Pair<Pair<T, T>, Double>> iterator = pairs.iterator();
-
-                while (iterator.hasNext()) {
+                for (Pair<Pair<T, T>, Double> pairDoublePair : pairs) {
                     // now for each pair do appropriate training
-                    Pair<Pair<T, T>, Double> pairDoublePair = iterator.next();
-
                     // That's probably ugly and probably should be improved somehow
 
                     T element1 = pairDoublePair.getFirst().getFirst();

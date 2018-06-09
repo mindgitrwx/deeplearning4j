@@ -87,8 +87,8 @@ public class PersonNatureAttr implements Serializable {
      * @param ints
      */
     public void setlocFreq(int[][] ints) {
-        for (int i = 0; i < ints.length; i++) {
-            if (ints[i][0] > 0) {
+        for (int[] anInt : ints) {
+            if (anInt[0] > 0) {
                 flag = true;
                 break;
             }

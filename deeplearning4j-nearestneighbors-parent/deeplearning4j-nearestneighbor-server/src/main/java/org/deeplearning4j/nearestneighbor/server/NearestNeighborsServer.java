@@ -110,8 +110,8 @@ public class NearestNeighborsServer {
         final List<String> labels = new ArrayList<>();
         if (labelsPath != null) {
             String[] labelsPathArr = labelsPath.split(",");
-            for (int i = 0; i < labelsPathArr.length; i++) {
-                labels.addAll(FileUtils.readLines(new File(labelsPathArr[i]), "utf-8"));
+            for (String aLabelsPathArr : labelsPathArr) {
+                labels.addAll(FileUtils.readLines(new File(aLabelsPathArr), "utf-8"));
             }
         }
         if (!labels.isEmpty() && labels.size() != rows)

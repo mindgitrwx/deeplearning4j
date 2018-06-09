@@ -56,9 +56,9 @@ class VaeReconstructionErrorWithKeyFunctionAdapter<K> extends BaseVaeScoreWithKe
     @Override
     public VariationalAutoencoder getVaeLayer() {
         MultiLayerNetwork network =
-                        new MultiLayerNetwork(MultiLayerConfiguration.fromJson((String) jsonConfig.getValue()));
+                        new MultiLayerNetwork(MultiLayerConfiguration.fromJson(jsonConfig.getValue()));
         network.init();
-        INDArray val = ((INDArray) params.value()).unsafeDuplication();
+        INDArray val = params.value().unsafeDuplication();
         if (val.length() != network.numParams(false))
             throw new IllegalStateException(
                             "Network did not have same number of parameters as the broadcast set parameters");

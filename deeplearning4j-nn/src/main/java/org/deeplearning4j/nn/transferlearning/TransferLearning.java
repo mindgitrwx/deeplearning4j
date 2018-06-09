@@ -332,11 +332,10 @@ public class TransferLearning {
             if (!editedLayers.isEmpty()) {
                 Integer[] editedLayersSorted = editedLayers.toArray(new Integer[editedLayers.size()]);
                 Arrays.sort(editedLayersSorted);
-                for (int i = 0; i < editedLayersSorted.length; i++) {
-                    int layerNum = editedLayersSorted[i];
+                for (Integer layerNum : editedLayersSorted) {
                     nOutReplaceBuild(layerNum, editedLayersMap.get(layerNum).getLeft(),
-                                    editedLayersMap.get(layerNum).getMiddle(),
-                                    editedLayersMap.get(layerNum).getRight());
+                                               editedLayersMap.get(layerNum).getMiddle(),
+                                               editedLayersMap.get(layerNum).getRight());
                 }
             }
 
@@ -344,9 +343,7 @@ public class TransferLearning {
             int i = 0;
             while (i < popN) {
                 Integer layerNum = origModel.getnLayers() - i;
-                if (inputPreProcessors.containsKey(layerNum)) {
-                    inputPreProcessors.remove(layerNum);
-                }
+                inputPreProcessors.remove(layerNum);
                 editedConfs.remove(editedConfs.size() - 1);
                 editedParams.remove(editedParams.size() - 1);
                 i++;

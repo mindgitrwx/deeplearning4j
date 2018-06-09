@@ -38,7 +38,7 @@ public class CRFModel extends Model {
             int win = 0;
             int size = 0;
             String name = null;
-            featureTree = new SmartForest<float[]>();
+            featureTree = new SmartForest<>();
             float[] value = null;
             do {
                 win = ois.readInt();

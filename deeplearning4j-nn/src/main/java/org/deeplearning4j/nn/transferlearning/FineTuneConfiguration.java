@@ -321,7 +321,7 @@ public class FineTuneConfiguration {
                 l.setConstraints(constraints.orElse(null));
         }
 
-        if (l != null && l instanceof BaseLayer) {
+        if (l instanceof BaseLayer) {
             BaseLayer bl = (BaseLayer) l;
             origWeightInit = bl.getWeightInit();
             if (activationFn != null)
@@ -378,7 +378,7 @@ public class FineTuneConfiguration {
         }
 
         //Check weight init. Remove dist if originally was DISTRIBUTION, and isn't now -> remove no longer needed distribution
-        if (l != null && l instanceof BaseLayer && origWeightInit == WeightInit.DISTRIBUTION && weightInit != null
+        if (l instanceof BaseLayer && origWeightInit == WeightInit.DISTRIBUTION && weightInit != null
                         && weightInit != WeightInit.DISTRIBUTION) {
             ((BaseLayer) l).setDist(null);
         }

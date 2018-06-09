@@ -2114,10 +2114,10 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
             }
         }
         cg.listeners = this.listeners;
-        for (int i = 0; i < topologicalOrder.length; i++) {
-            if (!vertices[topologicalOrder[i]].hasLayer())
+        for (int i : topologicalOrder) {
+            if (!vertices[i].hasLayer())
                 continue;
-            String layerName = vertices[topologicalOrder[i]].getVertexName();
+            String layerName = vertices[i].getVertexName();
             if (getLayer(layerName) instanceof FrozenLayer) {
                 cg.getVertex(layerName).setLayerAsFrozen();
             }
@@ -2264,12 +2264,12 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
             return flattenedParams;
 
         List<INDArray> list = new ArrayList<>(layers.length);
-        for (int i = 0; i < topologicalOrder.length; i++) {
-            if (!vertices[topologicalOrder[i]].hasLayer())
+        for (int i : topologicalOrder) {
+            if (!vertices[i].hasLayer())
                 continue;
 
-            Layer l = vertices[topologicalOrder[i]].getLayer();
-            INDArray layerParams = l.params();
+            Layer layer = vertices[i].getLayer();
+            INDArray layerParams = layer.params();
             if (layerParams != null)
                 list.add(layerParams); //may be null: subsampling etc layers
         }
@@ -2348,7 +2348,7 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
             for (String s : configuration.getNetworkOutputs()) {
                 GraphVertex gv = verticesMap.get(s);
                 Layer outLayer = gv.getLayer();
-                if (outLayer == null || !(outLayer instanceof IOutputLayer)) {
+                if (!(outLayer instanceof IOutputLayer)) {
                     log.warn("Cannot calculate score: vertex \"" + s + "\" is not an output layer");
                     return 0.0;
                 }
@@ -2411,7 +2411,7 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
         for (String s : configuration.getNetworkOutputs()) {
             GraphVertex gv = verticesMap.get(s);
             Layer outLayer = gv.getLayer();
-            if (outLayer == null || !(outLayer instanceof IOutputLayer)) {
+            if (!(outLayer instanceof IOutputLayer)) {
                 throw new UnsupportedOperationException(
                         "Cannot calculate score: vertex \"" + s + "\" is not an output layer");
             }
@@ -2530,11 +2530,11 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
         }
 
         int idx = 0;
-        for (int i = 0; i < topologicalOrder.length; i++) {
-            if (!vertices[topologicalOrder[i]].hasLayer())
+        for (int i : topologicalOrder) {
+            if (!vertices[i].hasLayer())
                 continue;
 
-            Layer layer = vertices[topologicalOrder[i]].getLayer();
+            Layer layer = vertices[i].getLayer();
             int range = layer.numParams();
             if (range <= 0)
                 continue; //Some layers: no parameters (subsampling etc)
@@ -2557,11 +2557,11 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
     @Override
     public void setBackpropGradientsViewArray(INDArray gradient) {
         int paramsSoFar = 0;
-        for (int i = 0; i < topologicalOrder.length; i++) {
-            if (!vertices[topologicalOrder[i]].hasLayer())
+        for (int i : topologicalOrder) {
+            if (!vertices[i].hasLayer())
                 continue;
 
-            Layer layer = vertices[topologicalOrder[i]].getLayer();
+            Layer layer = vertices[i].getLayer();
             int range = layer.numParams();
             if (range <= 0)
                 continue; //Some layers: no parameters (subsampling etc)
@@ -2809,7 +2809,7 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
      */
     public Map<String, INDArray> rnnGetPreviousState(String layerName) {
         Layer l = verticesMap.get(layerName).getLayer();
-        if (l == null || !(l instanceof RecurrentLayer))
+        if (!(l instanceof RecurrentLayer))
             return null;
         return ((RecurrentLayer) l).rnnGetPreviousState();
     }
@@ -2849,7 +2849,7 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
      */
     public void rnnSetPreviousState(String layerName, Map<String, INDArray> state) {
         Layer l = verticesMap.get(layerName).getLayer();
-        if (l == null || !(l instanceof RecurrentLayer)) {
+        if (!(l instanceof RecurrentLayer)) {
             throw new UnsupportedOperationException(
                     "Layer \"" + layerName + "\" is not a recurrent layer. Cannot set state");
         }
@@ -3121,8 +3121,8 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
             //Here: need to do forward pass through the network according to the topological ordering of the network
 
             Map<Integer, Pair<INDArray, MaskState>> map = new HashMap<>();
-            for (int i = 0; i < topologicalOrder.length; i++) {
-                GraphVertex current = vertices[topologicalOrder[i]];
+            for (int i : topologicalOrder) {
+                GraphVertex current = vertices[i];
 
                 if (current.isInputVertex()) {
                     INDArray fMask = featureMaskArrays[current.getVertexIndex()];
@@ -3148,7 +3148,7 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
 
                     Pair<INDArray, MaskState> outPair =
                             current.feedForwardMaskArrays(inputMasks, maskState, minibatchSize);
-                    map.put(topologicalOrder[i], outPair);
+                    map.put(i, outPair);
                 }
             }
         }
@@ -3186,12 +3186,12 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
      * Update the internal state of RNN layers after a truncated BPTT fit call
      */
     protected void rnnUpdateStateWithTBPTTState() {
-        for (int i = 0; i < layers.length; i++) {
-            if (layers[i] instanceof RecurrentLayer) {
-                RecurrentLayer l = ((RecurrentLayer) layers[i]);
+        for (Layer layer : layers) {
+            if (layer instanceof RecurrentLayer) {
+                RecurrentLayer l = ((RecurrentLayer) layer);
                 l.rnnSetPreviousState(l.rnnGetTBPTTState());
-            } else if (layers[i] instanceof MultiLayerNetwork) {
-                ((MultiLayerNetwork) layers[i]).updateRnnStateWithTBPTTState();
+            } else if (layer instanceof MultiLayerNetwork) {
+                ((MultiLayerNetwork) layer).updateRnnStateWithTBPTTState();
             }
         }
     }
@@ -3580,7 +3580,7 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
                 connections = configuration.getVertexInputs().get(currentVertexName).toString();
                 List<InputType> inputTypeList = new ArrayList<>();
                 if (currentVertex.hasLayer()) {
-                    Layer currentLayer = ((LayerVertex) currentVertex).getLayer();
+                    Layer currentLayer = currentVertex.getLayer();
                     classNameArr = currentLayer.getClass().getName().split("\\.");
                     className = classNameArr[classNameArr.length - 1];
                     paramCount = String.valueOf(currentLayer.numParams());
@@ -3621,8 +3621,8 @@ public class ComputationGraph implements Serializable, Model, NeuralNetwork {
                     if (inputTypes != null) {
                         VertexIndices[] inputVertices = currentVertex.getInputVertices();
                         if (inputVertices != null) {
-                            for (int i = 0; i < inputVertices.length; i++) {
-                                GraphVertex thisInputVertex = vertices[inputVertices[i].getVertexIndex()];
+                            for (VertexIndices inputVertice : inputVertices) {
+                                GraphVertex thisInputVertex = vertices[inputVertice.getVertexIndex()];
                                 inputTypeList.add(vertexOutputs.get(thisInputVertex.getVertexName()));
                             }
                         }

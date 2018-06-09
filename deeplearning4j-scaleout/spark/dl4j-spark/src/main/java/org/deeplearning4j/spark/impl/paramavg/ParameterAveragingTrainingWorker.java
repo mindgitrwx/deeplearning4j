@@ -158,9 +158,9 @@ public class ParameterAveragingTrainingWorker extends BaseTrainingWorker<Paramet
                 list.add(l); //Don't need to clone listeners: not from broadcast, so deserialization handles
             }
             if (m instanceof MultiLayerNetwork)
-                ((MultiLayerNetwork) m).setListeners(list);
+                m.setListeners(list);
             else
-                ((ComputationGraph) m).setListeners(list);
+                m.setListeners(list);
         }
     }
 

@@ -462,8 +462,7 @@ public class SbeStatsReport implements StatsReport, AgronaPersistable {
         List<byte[]> gcStatsLabelBytes = null;
         if (gcStats != null && !gcStats.isEmpty()) {
             gcStatsLabelBytes = new ArrayList<>();
-            for (int i = 0; i < gcStats.size(); i++) {
-                GCStats stats = gcStats.get(i);
+            for (GCStats stats : gcStats) {
                 bufferSize += 12; //Fixed per group entry: 2x int32 -> 8 bytes PLUS the header for the variable length GC name: another 4 bytes
                 byte[] nameAsBytes = SbeUtil.toBytes(true, stats.gcName);
                 bufferSize += nameAsBytes.length;
@@ -670,13 +669,13 @@ public class SbeStatsReport implements StatsReport, AgronaPersistable {
                             .memoryType(MemoryType.OffHeapCurrent).memoryBytes(offHeapCurrentBytes).next()
                             .memoryType(MemoryType.OffHeapMax).memoryBytes(offHeapMaxBytes);
             if (deviceCurrentBytes != null) {
-                for (int i = 0; i < deviceCurrentBytes.length; i++) {
-                    mue.next().memoryType(MemoryType.DeviceCurrent).memoryBytes(deviceCurrentBytes[i]);
+                for (long deviceCurrentByte : deviceCurrentBytes) {
+                    mue.next().memoryType(MemoryType.DeviceCurrent).memoryBytes(deviceCurrentByte);
                 }
             }
             if (deviceMaxBytes != null) {
-                for (int i = 0; i < deviceMaxBytes.length; i++) {
-                    mue.next().memoryType(MemoryType.DeviceMax).memoryBytes(deviceMaxBytes[i]);
+                for (long deviceMaxByte : deviceMaxBytes) {
+                    mue.next().memoryType(MemoryType.DeviceMax).memoryBytes(deviceMaxByte);
                 }
             }
         }

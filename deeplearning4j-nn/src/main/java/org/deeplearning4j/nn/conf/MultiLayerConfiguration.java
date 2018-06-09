@@ -539,10 +539,10 @@ public class MultiLayerConfiguration implements Serializable, Cloneable {
             }
             // Sets pretrain on the layer to track update for that specific layer
             if (isPretrain()) {
-                for (int j = 0; j < confs.size(); j++) {
-                    Layer l = confs.get(j).getLayer();
+                for (NeuralNetConfiguration conf : confs) {
+                    Layer l = conf.getLayer();
                     if (l instanceof BasePretrainNetwork)
-                        confs.get(j).setPretrain(pretrain);
+                        conf.setPretrain(pretrain);
                 }
             }
 

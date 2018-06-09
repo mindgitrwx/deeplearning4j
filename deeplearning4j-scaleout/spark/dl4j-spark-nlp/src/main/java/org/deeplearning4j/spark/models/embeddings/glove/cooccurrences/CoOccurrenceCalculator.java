@@ -77,7 +77,7 @@ public class CoOccurrenceCalculator implements Function<Pair<List<String>, Atomi
 
                 } else {
                     float coCount = (float) (1.0 / (j - i + Nd4j.EPS_THRESHOLD));
-                    coOCurreneCounts.incrementCount(sentence.get(j), sentence.get(i), (float) coCount);
+                    coOCurreneCounts.incrementCount(sentence.get(j), sentence.get(i), coCount);
                     if (symmetric)
                         coOCurreneCounts.incrementCount(sentence.get(i), sentence.get(j),
                                         (float) (1.0 / (j - i + Nd4j.EPS_THRESHOLD)));

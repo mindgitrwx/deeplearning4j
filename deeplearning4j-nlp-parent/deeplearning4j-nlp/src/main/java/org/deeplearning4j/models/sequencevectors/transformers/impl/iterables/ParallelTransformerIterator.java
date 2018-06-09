@@ -76,11 +76,11 @@ public class ParallelTransformerIterator extends BasicTransformerIterator {
     public void reset() {
         this.iterator.shutdown();
 
-        for (int x = 0; x < threads.length; x++) {
-            if (threads[x] != null) {
-                threads[x].shutdown();
+        for (TokenizerThread thread : threads) {
+            if (thread != null) {
+                thread.shutdown();
                 try {
-                    threads[x].interrupt();
+                    thread.interrupt();
                 } catch (Exception e) {
                     //
                 }

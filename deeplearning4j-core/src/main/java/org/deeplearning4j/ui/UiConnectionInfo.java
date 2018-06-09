@@ -36,7 +36,7 @@ public class UiConnectionInfo {
     public String getFirstPart() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append(useHttps ? "https" : "http").append("://").append(address).append(":").append(port).append("");
+        builder.append(useHttps ? "https" : "http").append("://").append(address).append(":").append(port);
 
         return builder.toString();
     }

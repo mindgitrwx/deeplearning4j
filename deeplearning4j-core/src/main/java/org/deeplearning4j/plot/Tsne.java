@@ -152,7 +152,7 @@ public class Tsne {
 
             Y.addi(iY);
             //  Y.addi(iY).subiRowVector(Y.mean(0));
-            INDArray tiled = Nd4j.tile(Y.mean(0), new int[] {Y.rows(), 1});
+            INDArray tiled = Nd4j.tile(Y.mean(0), Y.rows(), 1);
             Y.subi(tiled);
 
             if (!stopLying && (i > maxIter / 2 || i >= stopLyingIteration)) {

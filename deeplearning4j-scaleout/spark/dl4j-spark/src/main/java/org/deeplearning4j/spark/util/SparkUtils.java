@@ -89,7 +89,7 @@ public class SparkUtils {
                     boolean equals;
                     INDArray deserialized;
                     try {
-                        deserialized = (INDArray) si.deserialize(bb, null);
+                        deserialized = si.deserialize(bb, null);
                         //Equals method may fail on malformed INDArrays, hence should be within the try-catch
                         equals = Nd4j.linspace(1, 5, 5).equals(deserialized);
                     } catch (Exception e) {

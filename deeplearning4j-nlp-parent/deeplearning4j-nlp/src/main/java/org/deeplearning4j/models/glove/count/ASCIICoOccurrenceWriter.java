@@ -27,10 +27,10 @@ public class ASCIICoOccurrenceWriter<T extends SequenceElement> implements CoOcc
 
     @Override
     public void writeObject(CoOccurrenceWeight<T> object) {
-        StringBuilder builder = new StringBuilder(String.valueOf(object.getElement1().getIndex())).append(" ")
-                        .append(String.valueOf(object.getElement2().getIndex())).append(" ")
-                        .append(String.valueOf(object.getWeight()));
-        writer.println(builder.toString());
+        String builder = String.valueOf(object.getElement1().getIndex()) + " " +
+                String.valueOf(object.getElement2().getIndex()) + " " +
+                String.valueOf(object.getWeight());
+        writer.println(builder);
     }
 
     @Override

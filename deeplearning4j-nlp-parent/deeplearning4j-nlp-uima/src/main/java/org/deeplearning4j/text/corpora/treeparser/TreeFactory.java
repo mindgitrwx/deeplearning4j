@@ -71,8 +71,8 @@ public class TreeFactory {
                 }
             }
 
-            for (int i = 0; i < preChildren.size(); i++) {
-                children.add(buildTree(preChildren.get(i)));
+            for (TreebankNode preChild : preChildren) {
+                children.add(buildTree(preChild));
             }
 
             t.connect(children);
@@ -123,8 +123,8 @@ public class TreeFactory {
             List<TreebankNode> preChildren = children(node);
             List<Tree> children = new ArrayList<>();
             Tree t = toTree(node);
-            for (int i = 0; i < preChildren.size(); i++) {
-                children.add(buildTree(preChildren.get(i)));
+            for (TreebankNode preChild : preChildren) {
+                children.add(buildTree(preChild));
             }
 
             t.connect(children);

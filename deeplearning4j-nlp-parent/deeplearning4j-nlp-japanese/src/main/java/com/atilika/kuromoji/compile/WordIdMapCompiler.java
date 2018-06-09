@@ -70,8 +70,8 @@ public class WordIdMapCompiler implements Compiler {
                 indices[i] = wordIdIndex;
                 wordIdArray.set(wordIdIndex++, inner.length);
 
-                for (int j = 0; j < inner.length; j++) {
-                    wordIdArray.set(wordIdIndex++, inner[j]);
+                for (int anInner : inner) {
+                    wordIdArray.set(wordIdIndex++, anInner);
                 }
             }
         }

@@ -1235,8 +1235,7 @@ public class MultiLayerNetwork implements Serializable, Classifier, Layer, Neura
     @Override
     public int numParams(boolean backwards) {
         int length = 0;
-        for (int i = 0; i < layers.length; i++)
-            length += layers[i].numParams(backwards);
+        for (Layer layer : layers) length += layer.numParams(backwards);
 
         return length;
     }
@@ -1607,12 +1606,12 @@ public class MultiLayerNetwork implements Serializable, Classifier, Layer, Neura
     }
 
     public void updateRnnStateWithTBPTTState() {
-        for (int i = 0; i < layers.length; i++) {
-            if (layers[i] instanceof RecurrentLayer) {
-                RecurrentLayer l = ((RecurrentLayer) layers[i]);
+        for (Layer layer : layers) {
+            if (layer instanceof RecurrentLayer) {
+                RecurrentLayer l = ((RecurrentLayer) layer);
                 l.rnnSetPreviousState(l.rnnGetTBPTTState());
-            } else if (layers[i] instanceof MultiLayerNetwork) {
-                ((MultiLayerNetwork) layers[i]).updateRnnStateWithTBPTTState();
+            } else if (layer instanceof MultiLayerNetwork) {
+                ((MultiLayerNetwork) layer).updateRnnStateWithTBPTTState();
             }
         }
     }
@@ -2590,8 +2589,8 @@ public class MultiLayerNetwork implements Serializable, Classifier, Layer, Neura
     public Pair<INDArray, MaskState> feedForwardMaskArray(INDArray maskArray, MaskState currentMaskState,
                     int minibatchSize) {
         if (maskArray == null) {
-            for (int i = 0; i < layers.length; i++) {
-                layers[i].feedForwardMaskArray(null, null, minibatchSize);
+            for (Layer layer : layers) {
+                layer.feedForwardMaskArray(null, null, minibatchSize);
             }
         } else {
             //Do a forward pass through each preprocessor and layer
@@ -2709,8 +2708,8 @@ public class MultiLayerNetwork implements Serializable, Classifier, Layer, Neura
     @Override
     public double calcL2(boolean backpropParamsOnly) {
         double l2 = 0.0;
-        for (int i = 0; i < layers.length; i++) {
-            l2 += layers[i].calcL2(backpropParamsOnly);
+        for (Layer layer : layers) {
+            l2 += layer.calcL2(backpropParamsOnly);
         }
         return l2;
     }
@@ -2718,8 +2717,8 @@ public class MultiLayerNetwork implements Serializable, Classifier, Layer, Neura
     @Override
     public double calcL1(boolean backpropParamsOnly) {
         double l1 = 0.0;
-        for (int i = 0; i < layers.length; i++) {
-            l1 += layers[i].calcL1(backpropParamsOnly);
+        for (Layer layer : layers) {
+            l1 += layer.calcL1(backpropParamsOnly);
         }
         return l1;
     }
@@ -2853,11 +2852,11 @@ public class MultiLayerNetwork implements Serializable, Classifier, Layer, Neura
     public void rnnClearPreviousState() {
         if (layers == null)
             return;
-        for (int i = 0; i < layers.length; i++) {
-            if (layers[i] instanceof RecurrentLayer)
-                ((RecurrentLayer) layers[i]).rnnClearPreviousState();
-            else if (layers[i] instanceof MultiLayerNetwork) {
-                ((MultiLayerNetwork) layers[i]).rnnClearPreviousState();
+        for (Layer layer : layers) {
+            if (layer instanceof RecurrentLayer)
+                ((RecurrentLayer) layer).rnnClearPreviousState();
+            else if (layer instanceof MultiLayerNetwork) {
+                ((MultiLayerNetwork) layer).rnnClearPreviousState();
             }
         }
     }
@@ -3470,7 +3469,7 @@ public class MultiLayerNetwork implements Serializable, Classifier, Layer, Neura
                     + (layers.length - 1) + " inclusive");
         }
         org.deeplearning4j.nn.conf.layers.Layer conf = layers[layer].conf().getLayer();
-        if (conf == null || !(conf instanceof FeedForwardLayer)) {
+        if (!(conf instanceof FeedForwardLayer)) {
             return 0;
         }
         FeedForwardLayer ffl = (FeedForwardLayer) conf;

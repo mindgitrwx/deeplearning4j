@@ -79,8 +79,8 @@ public class File2Stream extends PathToStream {
 
         Vector<InputStream> vector = new Vector<>(libs.length);
 
-        for (int i = 0; i < libs.length; i++) {
-            vector.add(new FileInputStream(libs[i]));
+        for (File lib : libs) {
+            vector.add(new FileInputStream(lib));
         }
 
         return new SequenceInputStream(vector.elements());

@@ -61,7 +61,7 @@ public class RecordReaderFunction implements Function<String, DataSet> {
         List<Writable> record = recordReader.next();
         List<Writable> currList;
         if (record instanceof List)
-            currList = (List<Writable>) record;
+            currList = record;
         else
             currList = new ArrayList<>(record);
 

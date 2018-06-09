@@ -26,9 +26,9 @@ public class SbeUtil {
         if (bytes == null)
             return 0;
         int count = 0;
-        for (int i = 0; i < bytes.length; i++) {
-            if (bytes[i] != null)
-                count += bytes[i].length;
+        for (byte[] aByte : bytes) {
+            if (aByte != null)
+                count += aByte.length;
         }
         return count;
     }

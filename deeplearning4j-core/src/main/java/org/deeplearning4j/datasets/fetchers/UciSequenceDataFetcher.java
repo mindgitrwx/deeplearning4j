@@ -130,7 +130,7 @@ public class UciSequenceDataFetcher extends CacheableExtractableDataSetFetcher {
         for (String line : lines) {
 
             // label value
-            Integer count = new Integer(lineCount++ / 100);
+            Integer count = lineCount++ / 100;
 
             // replace white space with commas and label value + new line
             line = line.replaceAll("\\s+", ", " + count.toString() + "\n");

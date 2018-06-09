@@ -120,8 +120,8 @@ public class ValidateMultiDataSetFn implements Function<String, ValidationResult
     private static boolean invalidArray(INDArray[] array){
         if(array == null || array.length == 0)
             return true;
-        for( int i=0; i<array.length; i++ ){
-            if(array[i] == null){
+        for (INDArray anArray : array) {
+            if (anArray == null) {
                 return true;
             }
         }

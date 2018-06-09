@@ -174,8 +174,8 @@ public class StringGrid extends ArrayList<List<String>> {
         Collections.sort(removeOrder);
         for (List<String> list : this) {
             List<String> remove = new ArrayList<>();
-            for (int i = 0; i < columns.length; i++) {
-                remove.add(list.get(columns[i]));
+            for (Integer column : columns) {
+                remove.add(list.get(column));
             }
             list.removeAll(remove);
         }
@@ -281,9 +281,9 @@ public class StringGrid extends ArrayList<List<String>> {
         System.out.println(cluster.get("family mcdonalds restaurant"));
         System.out.println(cluster.get("family mcdonalds restaurants"));
         List<Map<String, Integer>> list2 = cluster.getClusters();
-        for (int i = 0; i < list2.size(); i++) {
-            if (list2.get(i).size() > 1) {
-                System.out.println(list2.get(i));
+        for (Map<String, Integer> aList2 : list2) {
+            if (aList2.size() > 1) {
+                System.out.println(aList2);
             }
         }
         FingerPrintKeyer keyer = new FingerPrintKeyer();
@@ -532,8 +532,7 @@ public class StringGrid extends ArrayList<List<String>> {
             //add right next to where column was split
             for (int j = 0; j < list.size(); j++) {
                 if (j == column)
-                    for (String s : split2)
-                        newList.add(s);
+                    Collections.addAll(newList, split2);
 
                 else
                     newList.add(list.get(j));

@@ -86,7 +86,7 @@ public class SkipGram<T extends SequenceElement> implements ElementsLearningAlgo
                 log.info("Initializing syn1Neg...");
                 ((InMemoryLookupTable<T>) lookupTable).setUseHS(configuration.isUseHierarchicSoftmax());
                 ((InMemoryLookupTable<T>) lookupTable).setNegative(configuration.getNegative());
-                ((InMemoryLookupTable<T>) lookupTable).resetWeights(false);
+                lookupTable.resetWeights(false);
             }
         }
 

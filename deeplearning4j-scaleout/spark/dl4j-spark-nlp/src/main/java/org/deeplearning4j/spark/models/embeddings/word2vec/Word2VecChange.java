@@ -34,9 +34,7 @@ public class Word2VecChange implements Serializable {
     private Map<Integer, Set<INDArray>> changes = new HashMap<>();
 
     public Word2VecChange(List<Triple<Integer, Integer, Integer>> counterMap, Word2VecParam param) {
-        Iterator<Triple<Integer, Integer, Integer>> iter = counterMap.iterator();
-        while (iter.hasNext()) {
-            Triple<Integer, Integer, Integer> next = iter.next();
+        for (Triple<Integer, Integer, Integer> next : counterMap) {
             Integer point = next.getFirst();
             Integer index = next.getSecond();
 

@@ -18,6 +18,8 @@
 
 package org.deeplearning4j.util;
 
+import org.nd4j.util.FingerPrintKeyer;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -36,9 +38,8 @@ public class StringCluster extends HashMap<String, Map<String, Integer>> {
     private static final long serialVersionUID = -4120559428585520276L;
 
     public StringCluster(List<String> list) {
-        for (int i = 0; i < list.size(); i++) {
-            String s = list.get(i);
-            org.nd4j.util.FingerPrintKeyer keyer = new org.nd4j.util.FingerPrintKeyer();
+        for (String s : list) {
+            FingerPrintKeyer keyer = new FingerPrintKeyer();
             String key = keyer.key(s);
             if (containsKey(key)) {
                 Map<String, Integer> m = get(key);

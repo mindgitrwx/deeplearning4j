@@ -186,8 +186,8 @@ public class TransferLearningHelper {
                 //Also: mark any inputs as to be frozen also
                 VertexIndices[] inputs = gv.getInputVertices();
                 if (inputs != null && inputs.length > 0) {
-                    for (int j = 0; j < inputs.length; j++) {
-                        int inputVertexIdx = inputs[j].getVertexIndex();
+                    for (VertexIndices input : inputs) {
+                        int inputVertexIdx = input.getVertexIndex();
                         String alsoFreeze = origGraph.getVertices()[inputVertexIdx].getVertexName();
                         allFrozen.add(alsoFreeze);
                     }
@@ -199,8 +199,8 @@ public class TransferLearningHelper {
                         //also need to add parents to list of allFrozen
                         VertexIndices[] inputs = gv.getInputVertices();
                         if (inputs != null && inputs.length > 0) {
-                            for (int j = 0; j < inputs.length; j++) {
-                                int inputVertexIdx = inputs[j].getVertexIndex();
+                            for (VertexIndices input : inputs) {
+                                int inputVertexIdx = input.getVertexIndex();
                                 String alsoFrozen = origGraph.getVertices()[inputVertexIdx].getVertexName();
                                 allFrozen.add(alsoFrozen);
                             }
@@ -209,14 +209,14 @@ public class TransferLearningHelper {
                 }
             }
         }
-        for (int i = 0; i < backPropOrder.length; i++) {
-            org.deeplearning4j.nn.graph.vertex.GraphVertex gv = origGraph.getVertices()[backPropOrder[i]];
+        for (int i : backPropOrder) {
+            GraphVertex gv = origGraph.getVertices()[i];
             String gvName = gv.getVertexName();
             //is it an unfrozen vertex that has an input vertex that is frozen?
             if (!allFrozen.contains(gvName) && !gv.isInputVertex()) {
                 VertexIndices[] inputs = gv.getInputVertices();
-                for (int j = 0; j < inputs.length; j++) {
-                    int inputVertexIdx = inputs[j].getVertexIndex();
+                for (VertexIndices input : inputs) {
+                    int inputVertexIdx = input.getVertexIndex();
                     String inputVertex = origGraph.getVertices()[inputVertexIdx].getVertexName();
                     if (allFrozen.contains(inputVertex)) {
                         frozenInputVertices.add(inputVertex);

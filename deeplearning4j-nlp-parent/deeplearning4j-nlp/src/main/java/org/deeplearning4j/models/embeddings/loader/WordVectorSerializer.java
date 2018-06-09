@@ -139,7 +139,7 @@ public class WordVectorSerializer {
                 currLine++;
             }
 
-            lookupTable = (InMemoryLookupTable) new InMemoryLookupTable.Builder().cache(cache).vectorLength(layerSize)
+            lookupTable = new InMemoryLookupTable.Builder().cache(cache).vectorLength(layerSize)
                             .build();
             lookupTable.setSyn0(syn0);
 
@@ -187,7 +187,7 @@ public class WordVectorSerializer {
 
             printOutProjectedMemoryUse(words, size, 1);
 
-            lookupTable = (InMemoryLookupTable<VocabWord>) new InMemoryLookupTable.Builder<VocabWord>().cache(cache)
+            lookupTable = new InMemoryLookupTable.Builder<VocabWord>().cache(cache)
                             .useHierarchicSoftmax(false).vectorLength(size).build();
 
             String word;
@@ -1062,18 +1062,22 @@ public class WordVectorSerializer {
                 String[] split = line.split(" ");
                 split[1] = split[1].replaceAll(WHITESPACE_REPLACEMENT, " ");
                 VocabWord word = new VocabWord(1.0, split[1]);
-                if (split[0].equals("L")) {
-                    // we have label element here
-                    word.setSpecial(true);
-                    word.markAsLabel(true);
-                    labels.add(word.getLabel());
-                } else if (split[0].equals("E")) {
-                    // we have usual element, aka word here
-                    word.setSpecial(false);
-                    word.markAsLabel(false);
-                } else
-                    throw new IllegalStateException(
-                                    "Source stream doesn't looks like ParagraphVectors serialized model");
+                switch (split[0]) {
+                    case "L":
+                        // we have label element here
+                        word.setSpecial(true);
+                        word.markAsLabel(true);
+                        labels.add(word.getLabel());
+                        break;
+                    case "E":
+                        // we have usual element, aka word here
+                        word.setSpecial(false);
+                        word.markAsLabel(false);
+                        break;
+                    default:
+                        throw new IllegalStateException(
+                                "Source stream doesn't looks like ParagraphVectors serialized model");
+                }
 
                 // this particular line is just for backward compatibility with InMemoryLookupCache
                 word.setIndex(vocabCache.numWords());
@@ -1105,9 +1109,9 @@ public class WordVectorSerializer {
 
 
             InMemoryLookupTable<VocabWord> lookupTable =
-                            (InMemoryLookupTable<VocabWord>) new InMemoryLookupTable.Builder<VocabWord>()
-                                            .vectorLength(arrays.get(0).columns()).useAdaGrad(false).cache(vocabCache)
-                                            .build();
+                    new InMemoryLookupTable.Builder<VocabWord>()
+                                    .vectorLength(arrays.get(0).columns()).useAdaGrad(false).cache(vocabCache)
+                                    .build();
             Nd4j.clearNans(syn);
             lookupTable.setSyn0(syn);
 
@@ -1455,9 +1459,9 @@ public class WordVectorSerializer {
 
         // now, it's time to transfer syn0/syn1/syn1 neg values
         InMemoryLookupTable lookupTable =
-                        (InMemoryLookupTable) new InMemoryLookupTable.Builder().negative(configuration.getNegative())
-                                        .useAdaGrad(configuration.isUseAdaGrad()).lr(configuration.getLearningRate())
-                                        .cache(vocabCache).vectorLength(configuration.getLayersSize()).build();
+                new InMemoryLookupTable.Builder().negative(configuration.getNegative())
+                                .useAdaGrad(configuration.isUseAdaGrad()).lr(configuration.getLearningRate())
+                                .cache(vocabCache).vectorLength(configuration.getLayersSize()).build();
 
         // we create all arrays
         lookupTable.resetWeights(true);
@@ -1747,8 +1751,8 @@ public class WordVectorSerializer {
         INDArray syn = Nd4j.vstack(arrays);
 
         InMemoryLookupTable lookupTable =
-                        (InMemoryLookupTable) new InMemoryLookupTable.Builder().vectorLength(arrays.get(0).columns())
-                                        .useAdaGrad(false).cache(cache).useHierarchicSoftmax(false).build();
+                new InMemoryLookupTable.Builder().vectorLength(arrays.get(0).columns())
+                                .useAdaGrad(false).cache(cache).useHierarchicSoftmax(false).build();
         if (Nd4j.ENFORCE_NUMERICAL_STABILITY)
             Nd4j.clearNans(syn);
 
@@ -1810,8 +1814,8 @@ public class WordVectorSerializer {
         }
 
         InMemoryLookupTable<VocabWord> lookupTable =
-                        (InMemoryLookupTable<VocabWord>) new InMemoryLookupTable.Builder<VocabWord>()
-                                        .vectorLength(arrays.get(0).columns()).cache(cache).build();
+                new InMemoryLookupTable.Builder<VocabWord>()
+                                .vectorLength(arrays.get(0).columns()).cache(cache).build();
 
         INDArray syn = Nd4j.vstack(arrays);
 
@@ -1923,7 +1927,7 @@ public class WordVectorSerializer {
     private static byte[] listToArray(List<Byte> code) {
         byte[] array = new byte[40];
         for (int x = 0; x < code.size(); x++) {
-            array[x] = code.get(x).byteValue();
+            array[x] = code.get(x);
         }
         return array;
     }
@@ -1931,7 +1935,7 @@ public class WordVectorSerializer {
     private static int[] listToArray(List<Integer> points, int codeLen) {
         int[] array = new int[points.size()];
         for (int x = 0; x < points.size(); x++) {
-            array[x] = points.get(x).intValue();
+            array[x] = points.get(x);
         }
         return array;
     }
@@ -2057,7 +2061,7 @@ public class WordVectorSerializer {
 
         reader.close();
 
-        InMemoryLookupTable<T> lookupTable = (InMemoryLookupTable<T>) new InMemoryLookupTable.Builder<T>()
+        InMemoryLookupTable<T> lookupTable = new InMemoryLookupTable.Builder<T>()
                         .vectorLength(rows.get(0).columns()).cache(vocabCache).build(); // fix: add vocab cache
 
         /*

@@ -39,8 +39,8 @@ public class StringArrayIO {
 
         dataOutput.writeInt(length);
 
-        for (int i = 0; i < array.length; i++) {
-            dataOutput.writeUTF(array[i]);
+        for (String anArray : array) {
+            dataOutput.writeUTF(anArray);
         }
     }
 
@@ -63,8 +63,8 @@ public class StringArrayIO {
 
         dataOutput.writeInt(length);
 
-        for (int i = 0; i < length; i++) {
-            writeArray(dataOutput, array[i]);
+        for (String[] anArray : array) {
+            writeArray(dataOutput, anArray);
         }
     }
 

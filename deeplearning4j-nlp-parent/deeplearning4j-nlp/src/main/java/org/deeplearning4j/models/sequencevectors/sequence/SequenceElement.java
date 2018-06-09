@@ -228,8 +228,8 @@ public abstract class SequenceElement implements Comparable<SequenceElement>, Se
     @JsonIgnore
     public void setPoints(int[] points) {
         this.points = new ArrayList<>();
-        for (int i = 0; i < points.length; i++) {
-            this.points.add(points[i]);
+        for (int point : points) {
+            this.points.add(point);
         }
     }
 

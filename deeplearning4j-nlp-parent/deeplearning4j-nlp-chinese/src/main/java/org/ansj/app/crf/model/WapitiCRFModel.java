@@ -176,7 +176,6 @@ public class WapitiCRFModel extends Model {
 
             if (split.length == 2) {
                 featureNames.add(Pair.with(split[1], ""));
-                continue;
             } else {
 
                 String name = split[2];
@@ -216,7 +215,6 @@ public class WapitiCRFModel extends Model {
 
         for (String str : split) {
             if ("".equals(str)) {
-                continue;
             } else if (str.length() == 1) {
                 result.append(str.charAt(0));
             } else if (str.equals("XIEGANG")) {

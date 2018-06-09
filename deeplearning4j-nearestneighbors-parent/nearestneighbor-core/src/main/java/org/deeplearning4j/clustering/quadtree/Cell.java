@@ -42,9 +42,9 @@ public class Cell implements Serializable {
      * @param point the point to check
      * @return true if the point is contained, false otherwise
      */
-    public boolean containsPoint(INDArray point) {
+    public boolean isContainsPoint(INDArray point) {
         double first = point.getDouble(0), second = point.getDouble(1);
-        return x - hw <= first && x + hw >= first && y - hh <= second && y + hh >= second;
+        return !(x - hw <= first) || !(x + hw >= first) || !(y - hh <= second) || !(y + hh >= second);
     }
 
     @Override
