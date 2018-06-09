@@ -32,7 +32,7 @@ import java.net.URL;
 
 @Data
 @NoArgsConstructor
-public class MnistFetcher {
+public class MnistFetcher implements BaseFetcherInterface {
     protected static final Logger log = LoggerFactory.getLogger(MnistFetcher.class);
 
     protected File BASE_DIR = new File(System.getProperty("user.home"));
@@ -70,34 +70,36 @@ public class MnistFetcher {
     }
 
     // --- Train files ---
-    public String getTrainingFilesURL() {
-        return TRAINING_FILES_URL;
-    }
+    @Override
+    public String getTrainingFilesURL() { return TRAINING_FILES_URL; }
 
+    @Override
     public String getTrainingFilesMD5() {
         return TRAINING_FILES_MD_5;
     }
 
+    @Override
     public String getTrainingFilesFilename() {
         return TRAINING_FILES_FILENAME;
     }
 
-    public String getTrainingFilesFilename_unzipped() {
-        return TRAINING_FILES_FILENAME_UNZIPPED;
-    }
+    @Override
+    public String getTrainingFilesFilename_unzipped() { return TRAINING_FILES_FILENAME_UNZIPPED; }
 
+    @Override
     public String getTrainingFileLabelsURL() {
         return TRAINING_FILE_LABELS_URL;
     }
 
+    @Override
     public String getTrainingFileLabelsMD5() {
         return TRAINING_FILE_LABELS_MD_5;
     }
 
-    public String getTrainingFileLabelsFilename() {
-        return TRAINING_FILE_LABELS_FILENAME;
-    }
+    @Override
+    public String getTrainingFileLabelsFilename() { return TRAINING_FILE_LABELS_FILENAME; }
 
+    @Override
     public String getTrainingFileLabelsFilename_unzipped() {
         return TRAINING_FILE_LABELS_FILENAME_UNZIPPED;
     }
@@ -105,34 +107,42 @@ public class MnistFetcher {
 
     // --- Test files ---
 
+    @Override
     public String getTestFilesURL() {
         return TEST_FILES_URL;
     }
 
+    @Override
     public String getTestFilesMD5() {
         return TEST_FILES_MD_5;
     }
 
+    @Override
     public String getTestFilesFilename() {
         return TEST_FILES_FILENAME;
     }
 
+    @Override
     public String getTestFilesFilename_unzipped() {
         return TEST_FILES_FILENAME_UNZIPPED;
     }
 
+    @Override
     public String getTestFileLabelsURL() {
         return TEST_FILE_LABELS_URL;
     }
 
+    @Override
     public String getTestFileLabelsMD5() {
         return TEST_FILE_LABELS_MD_5;
     }
 
+    @Override
     public String getTestFileLabelsFilename() {
         return TEST_FILE_LABELS_FILENAME;
     }
 
+    @Override
     public String getTestFileLabelsFilename_unzipped() {
         return TEST_FILE_LABELS_FILENAME_UNZIPPED;
     }

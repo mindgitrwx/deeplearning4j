@@ -23,18 +23,21 @@ import org.deeplearning4j.datasets.iterator.impl.EmnistDataSetIterator;
 
 import java.io.File;
 
+import static org.datavec.image.loader.BaseImageLoader.BASE_DIR;
+
 /**
  * Downloader for EMNIST dataset
  *
  * @author Alex Black
  */
 @Slf4j
-public class EmnistFetcher extends MnistFetcher {
+public class EmnistFetcher implements BaseFetcherInterface{
     protected static final String LOCAL_DIR_NAME = "EMNIST";
 
     private static final String BASE_URL = "http://deeplearning4j-resources.westus2.cloudapp.azure.com/emnist/";
 
     private final EmnistDataSetIterator.Set ds;
+    private final File FILE_DIR;
 
     public EmnistFetcher(EmnistDataSetIterator.Set ds) {
         this.ds = ds;
